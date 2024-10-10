@@ -118,3 +118,11 @@ option {
 .star:active {
   transform: scale(1.1); 
 }
+
+.retorno-feedback {
+  background-color: white;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 20px;
+}
