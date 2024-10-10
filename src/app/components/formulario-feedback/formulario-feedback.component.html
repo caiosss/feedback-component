@@ -1,0 +1,62 @@
+<div class="formulario">
+  <form (ngSubmit)="onSubmit()" method="post">
+
+    <div *ngFor="let item of questions; let i = index" class="label-input">
+      <label [for]="'question' + i">{{ item.question }}</label>
+
+      <div *ngIf="!item.isYesNo && item.rating === undefined">
+        <input type="text"
+        class="texto"
+        id="{{ 'question' + i }}"
+        name="resposta{{i}}"
+        placeholder="Digite..."
+        [(ngModel)]="item.resposta"
+        (blur)="valor(item, $event)"
+        >
+      </div>
+
+      <div *ngIf="item.isYesNo">
+        <select
+          id="{{ 'question' + i }}"
+          name="resposta{{i}}"
+          [(ngModel)]="item.resposta"
+          (change)="valor(item, $event)"
+        >
+          <option value="" disabled selected>Selecione uma opção</option>
+          <option value="Sim">Sim</option>
+          <option value="Não">Não</option>
+        </select>
+      </div>
+
+      <div *ngIf="item.rating !== undefined" class="star-rating">
+        <span
+          *ngFor="let star of [1, 2, 3, 4, 5]; let idx = index"
+          class="star"
+          [class.filled]="item.rating >= star"
+          (click)="setRating(item, star)"
+        >
+          ★
+        </span>
+      </div>
+
+      <br /><br />
+    </div>
+
+    <div class="btn-comments">
+      <button type="button" (click)="toggleShow()" class="btn-add-comment">
+        Adicionar Comentário
+      </button>
+      <div *ngIf="enableComments" class="comentario">
+        <textarea
+          [(ngModel)]="feedback.comentario"
+          name="comentario"
+          cols="30"
+          placeholder="Deixe seu comentário de feedback!"
+        ></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-submit">Enviar Feedback</button>
+
+  </form>
+</div>

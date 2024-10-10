@@ -1,0 +1,12 @@
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <span
+      (click)="setRating(i + 1)"
+      [class.filled]="star"
+      class="star"
+      [attr.title]="i + 1 + ' Estrela(s)'"
+    >
+      ★
+    </span>
+  </ng-container>
+</div>
